@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="awd,cheat,">
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="jessic4fl">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="awd skills">
+<meta name="keywords" content="awd,cheat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="awd-cheat">
+<meta property="og:url" content="http://yoursite.com/2018/12/23/awd-cheat/index.html">
 <meta property="og:site_name" content="jessic4fl">
+<meta property="og:description" content="awd skills">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-23T03:41:51.274Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="jessic4fl">
+<meta name="twitter:title" content="awd-cheat">
+<meta name="twitter:description" content="awd skills">
 
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/23/awd-cheat/">
 
 
 
 
 
-  <title>jessic4fl</title>
+  <title>awd-cheat | jessic4fl</title>
   
 
 
@@ -140,8 +145,7 @@
     
   
 
-  <div class="container sidebar-position-right 
-  page-home">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -276,9 +280,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -308,9 +312,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/23/awd-cheat/" itemprop="url">awd-cheat</a></h1>
+          <h1 class="post-title" itemprop="name headline">awd-cheat</h1>
         
 
         <div class="post-meta">
@@ -370,18 +372,74 @@
       
 
       
-        
-          <p>awd skills<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/23/awd-cheat/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+        <p>awd skills<br><a id="more"></a></p>
+<h2 id="文件共享"><a href="#文件共享" class="headerlink" title="文件共享"></a>文件共享</h2><ul>
+<li>Samba/Win文件共享 /FTP</li>
+<li>飞鸽传书</li>
+<li>HackMD </li>
+</ul>
+<h2 id="免密登录"><a href="#免密登录" class="headerlink" title="免密登录"></a>免密登录</h2><ul>
+<li>vim ~/.ssh/config</li>
+<li><p>ssh-keygen -t rsa</p>
+</li>
+<li><p>熟练使用 byotu/tmux/screen</p>
+</li>
+</ul>
+<h2 id="patch"><a href="#patch" class="headerlink" title="patch"></a>patch</h2><ul>
+<li>cp pwn_patched /path/to/version/pwn_0911_what_are_changes   //做好版本管理</li>
+<li>scp pwn_0911_what_are_changes ctf-pwn:/tmp/pwn_patch_newest</li>
+<li><p>ctf@ctf-pwn$</p>
+<ul>
+<li>rm /home/pwn/pwn ;cp /tmp/pwn_patch_newest /home/pwn/pwn</li>
+<li>chmod +x /home/pwn/pwn</li>
+</ul>
+</li>
+<li><p>Web:直接修改</p>
+</li>
+</ul>
+<h2 id="restore"><a href="#restore" class="headerlink" title="restore"></a>restore</h2><ul>
+<li>tar zxvf </li>
+</ul>
+<h2 id="privilege"><a href="#privilege" class="headerlink" title="privilege"></a>privilege</h2><ul>
+<li>webshell</li>
+<li>cp pwn pwn.bak;cp /bin/sh pwn;(echo yyy|nc )</li>
+<li>uname -a -&gt;4.4.0-ubuntu-136 -&gt;db-exploit.org -&gt;…</li>
+<li>mysql with root&gt;grant select,update,delete on da….</li>
+</ul>
+<h2 id="monitor"><a href="#monitor" class="headerlink" title="monitor"></a>monitor</h2><ul>
+<li>ps -ef |grep apache2 |wc -l</li>
+<li><p>while true;do ps -u pwn ;sleep(1);done</p>
+</li>
+<li><p>ps -o pid  (执行多次对比pid值增加速度，对于某些反复启动的马)</p>
+</li>
+<li>inotify /var/www/html /tmp</li>
+</ul>
+<h2 id="clean-backdoor"><a href="#clean-backdoor" class="headerlink" title="clean backdoor"></a>clean backdoor</h2><ul>
+<li><p>killall -u pwn /killall -u www-date</p>
+</li>
+<li><p>kill -9 -1</p>
+</li>
+<li>crontab -r</li>
+<li><p>chmod 777 /path/to/backdoor.php ; rm /path/to/backdoor.php (当你没有直接权限删除的时候，先修改它的权限)</p>
+</li>
+<li><p>确认被提权了，申请重置</p>
+</li>
+</ul>
+<h2 id="automata"><a href="#automata" class="headerlink" title="automata"></a>automata</h2><ul>
+<li>multiprocessing</li>
+<li>paramiko /from pwn import ssh</li>
+<li>flask(submit api)</li>
+</ul>
+<h2 id="easy-patch"><a href="#easy-patch" class="headerlink" title="easy_patch"></a>easy_patch</h2><p>思想：简单修改程序的逻辑或者参数，让exp失效<br>plt.free -&gt; ret</p>
+<p>sub esp,20h<br>mov ecx, [esp +10]<br>改成<br>sub esp,30h<br>mov ecx, [esp +10]</p>
+<h2 id="get-flow"><a href="#get-flow" class="headerlink" title="get flow"></a>get flow</h2><ul>
+<li>tcpdump -i 网卡 -s 0 -w 1.pcap</li>
+<li>流量转发</li>
+<li>ptrace</li>
+</ul>
+
       
-    </p></div>
+    </div>
     
     
     
@@ -394,304 +452,38 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/23/pwnTesting/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="jessica">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jessic4fl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/23/pwnTesting/" itemprop="url">pwn-testing</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-23T11:32:22+08:00">
-                2018-12-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/awd/" rel="tag"># awd</a>
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/23/pwnTesting/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/23/pwnTesting/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
+            <a href="/tags/cheat/" rel="tag"># cheat</a>
           
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          <p>pwn skills<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/23/pwnTesting/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/23/pwnTesting/" rel="next" title="pwn-testing">
+                <i class="fa fa-chevron-left"></i> pwn-testing
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/09/ss/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="jessica">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jessic4fl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/09/ss/" itemprop="url">在linux下配置shadowsocks服务端&客户端</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+          <div class="post-nav-prev post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-09T11:56:31+08:00">
-                2018-12-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/blog/" itemprop="url" rel="index">
-                    <span itemprop="name">blog</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/09/ss/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/09/ss/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <p>Shadowsocks可以指：一种基于Socks5代理方式的加密传输协议，也可以指实现这个协议的各种开发包。目前包使用Python、C、C++、C#、Go语言等编程语言开发，大部分主要实现（iOS平台的除外）采用Apache许可证、GPL、MIT许可证等多种自由软件许可协议开放源代码。Shadowsocks分为服务器端和客户端，在使用之前，需要先将服务器端部署到服务器上面，然后通过客户端连接并创建本地代理。<br>在中国大陆，本工具也被广泛用于突破防火长城（GFW），以浏览被封锁、遮蔽或干扰的内容。2015年8月22日，Shadowsocks原作者Clowwindy称受到了中国政府的压力，宣布停止维护此计划（项目）并移除其个人页面所存储的源代码。<br><a href="https://github.com/shadowsocks/shadowsocks/wiki/Shadowsocks-%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E" target="_blank" rel="noopener">shadowsocks的github</a><br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/09/ss/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -701,322 +493,11 @@
   </article>
 
 
-    
+
+    <div class="post-spread">
       
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/08/xss-1/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="jessica">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jessic4fl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/08/xss-1/" itemprop="url">XSS--CSP绕过【firefox和chrome】和data://协议的使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-08T22:31:53+08:00">
-                2018-12-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/web-security/" itemprop="url" rel="index">
-                    <span itemprop="name">web security</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/08/xss-1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/08/xss-1/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>最近做一道关于XSS的CTF题目，用到了data://协议触发XSS，并且需要绕过带nonce的CSP策略。由于题目环境没有了，这里主要总结一下其中用到的一些技巧。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/08/xss-1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
+    </div>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/08/hello-world/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="jessica">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="jessic4fl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/08/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-08T21:08:08+08:00">
-                2018-12-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/blog/" itemprop="url" rel="index">
-                    <span itemprop="name">blog</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/08/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/12/08/hello-world/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/08/hello-world/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -1024,6 +505,20 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -1044,8 +539,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -1123,6 +627,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件共享"><span class="nav-number">1.</span> <span class="nav-text">文件共享</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#免密登录"><span class="nav-number">2.</span> <span class="nav-text">免密登录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#patch"><span class="nav-number">3.</span> <span class="nav-text">patch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#restore"><span class="nav-number">4.</span> <span class="nav-text">restore</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#privilege"><span class="nav-number">5.</span> <span class="nav-text">privilege</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#monitor"><span class="nav-number">6.</span> <span class="nav-text">monitor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clean-backdoor"><span class="nav-number">7.</span> <span class="nav-text">clean backdoor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#automata"><span class="nav-number">8.</span> <span class="nav-text">automata</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#easy-patch"><span class="nav-number">9.</span> <span class="nav-text">easy_patch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get-flow"><span class="nav-number">10.</span> <span class="nav-text">get flow</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1285,6 +805,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -1302,6 +826,18 @@
       <script id="dsq-count-scr" src="https://jes.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/12/23/awd-cheat/';
+          this.page.identifier = '2018/12/23/awd-cheat/';
+          this.page.title = 'awd-cheat';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://jes.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   
